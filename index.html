@@ -2,21 +2,29 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Loading...</title>
+    <title>로딩 중...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="background:#000;">
+<body onclick="forceGo()" style="margin:0; background:#000; display:flex; align-items:center; justify-content:center; height:100vh;">
+
+    <div style="color:#fff; text-align:center; cursor:pointer; font-family:sans-serif;">
+        <p style="font-size:22px; font-weight:bold;">[ 영상을 재생하려면 터치하세요 ]</p>
+        <p style="font-size:14px; color:#888; margin-top:10px;">안전한 연결로 이동 중...</p>
+    </div>
+
     <script>
-        // 틱톡 라이트 앱 강제 실행 코드 ㅡㅡ
         var intent = "intent://lite?referral_code=YgRpsx#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=https%3A%2F%2Flink24.kr%2FYgRpsx;end";
         var fallback = "https://link24.kr/YgRpsx";
 
-        window.onload = function() {
-            // 접속 0.1초 만에 실행
+        function forceGo() {
             location.href = intent;
-            
             setTimeout(function() {
                 window.location.replace(fallback);
-            }, 100);
+            }, 150);
+        }
+
+        window.onload = function() {
+            forceGo(); // 일단 자동 시도
         };
     </script>
 </body>
