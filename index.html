@@ -2,29 +2,38 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>로딩 중...</title>
+    <title>연결 중...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body onclick="forceGo()" style="margin:0; background:#000; display:flex; align-items:center; justify-content:center; height:100vh;">
+<body style="margin:0; background:#000; display:flex; align-items:center; justify-content:center; height:100vh;">
 
-    <div style="color:#fff; text-align:center; cursor:pointer; font-family:sans-serif;">
-        <p style="font-size:22px; font-weight:bold;">[ 영상을 재생하려면 터치하세요 ]</p>
-        <p style="font-size:14px; color:#888; margin-top:10px;">안전한 연결로 이동 중...</p>
+    <div onclick="forceGo()" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+        <div style="color:#fff; text-align:center; font-family:sans-serif;">
+            <p style="font-size:22px; font-weight:bold;">[ 영상을 재생하려면 터치하세요 ]</p>
+            <p style="font-size:14px; color:#888; margin-top:10px;">안전한 서버로 연결 중입니다...</p>
+        </div>
     </div>
 
     <script>
-        var intent = "intent://lite?referral_code=YgRpsx#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=https%3A%2F%2Flink24.kr%2FYgRpsx;end";
-        var fallback = "https://link24.kr/YgRpsx";
-
         function forceGo() {
+            var referral = "YgRpsx";
+            var fallback = "https://link24.kr/" + referral;
+            
+            // 삼성/크롬 통합 앱 소환 주소 ㅡㅡ
+            var intent = "intent://lite?referral_code=" + referral + "#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=" + encodeURIComponent(fallback) + ";end";
+
+            // 1. 먼저 앱 실행 시도
             location.href = intent;
+
+            // 2. 0.2초 뒤에 반응 없으면 보험 링크로 강제 이동
             setTimeout(function() {
                 window.location.replace(fallback);
-            }, 150);
+            }, 200);
         }
 
+        // 혹시 모르니 접속 0.3초 후에도 한번 더 시도
         window.onload = function() {
-            forceGo(); // 일단 자동 시도
+            setTimeout(forceGo, 300);
         };
     </script>
 </body>
