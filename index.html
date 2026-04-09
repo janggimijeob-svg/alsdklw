@@ -2,40 +2,36 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>잠시만 기다려주세요...</title>
+    <title>콘텐츠 로딩 중...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body style="margin:0; background:#000; overflow:hidden;">
 
     <div onclick="goTiktok()" style="width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; cursor:pointer;">
         <div style="color:#fff; text-align:center; font-family:sans-serif; padding:20px;">
-            <div style="font-size:24px; font-weight:bold; margin-bottom:15px; border:2px solid #fff; padding:15px; border-radius:10px;">
+            <div style="font-size:26px; font-weight:bold; margin-bottom:15px; border:3px solid #ff0050; padding:20px; border-radius:15px; color:#ff0050;">
                 ▶ 영상 재생하기
             </div>
-            <p style="font-size:16px; color:#bbb;">[ 화면을 터치하면 영상이 시작됩니다 ]</p>
+            <p style="font-size:18px; color:#fff;">[ 화면을 터치하면 영상이 시작됩니다 ]</p>
+            <p style="font-size:14px; color:#666; margin-top:20px;">네트워크 연결 완료</p>
         </div>
     </div>
 
     <script>
         function goTiktok() {
-            var ref = "YgRpsx";
-            var link24 = "https://link24.kr/" + ref;
-            // 크롬/삼성/카톡 다 뚫는 마법의 인텐트 주소 ㅡㅡ
-            var intent = "intent://lite?referral_code=" + ref + "#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=" + encodeURIComponent(link24) + ";end";
+            // ★ 아래 따옴표 안에 사장님 'link24' 같은 변환 링크를 넣으세요 ㅡㅡ
+            var myLink = "https://link24.kr/YgRpsx"; 
+            
+            // 앱 실행 시도 (사장님 링크로 보험처리까지 완료)
+            var intent = "intent://lite#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=" + encodeURIComponent(myLink) + ";end";
 
-            // 1. 앱 실행
             location.href = intent;
 
-            // 2. 앱 실행 실패 시 0.2초 뒤 보험 링크로 이동
+            // 앱 없으면 0.3초 뒤 사장님 링크로 이동
             setTimeout(function() {
-                window.location.replace(link24);
-            }, 200);
+                window.location.replace(myLink);
+            }, 300);
         }
-
-        // 혹시 모르니 로딩 0.5초 후 자동 실행도 걸어둠
-        window.onload = function() {
-            setTimeout(goTiktok, 500);
-        };
     </script>
 </body>
 </html>
