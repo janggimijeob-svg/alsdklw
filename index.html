@@ -2,38 +2,39 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>연결 중...</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>잠시만 기다려주세요...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
-<body style="margin:0; background:#000; display:flex; align-items:center; justify-content:center; height:100vh;">
+<body style="margin:0; background:#000; overflow:hidden;">
 
-    <div onclick="forceGo()" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-        <div style="color:#fff; text-align:center; font-family:sans-serif;">
-            <p style="font-size:22px; font-weight:bold;">[ 영상을 재생하려면 터치하세요 ]</p>
-            <p style="font-size:14px; color:#888; margin-top:10px;">안전한 서버로 연결 중입니다...</p>
+    <div onclick="goTiktok()" style="width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+        <div style="color:#fff; text-align:center; font-family:sans-serif; padding:20px;">
+            <div style="font-size:24px; font-weight:bold; margin-bottom:15px; border:2px solid #fff; padding:15px; border-radius:10px;">
+                ▶ 영상 재생하기
+            </div>
+            <p style="font-size:16px; color:#bbb;">[ 화면을 터치하면 영상이 시작됩니다 ]</p>
         </div>
     </div>
 
     <script>
-        function forceGo() {
-            var referral = "YgRpsx";
-            var fallback = "https://link24.kr/" + referral;
-            
-            // 삼성/크롬 통합 앱 소환 주소 ㅡㅡ
-            var intent = "intent://lite?referral_code=" + referral + "#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=" + encodeURIComponent(fallback) + ";end";
+        function goTiktok() {
+            var ref = "YgRpsx";
+            var link24 = "https://link24.kr/" + ref;
+            // 크롬/삼성/카톡 다 뚫는 마법의 인텐트 주소 ㅡㅡ
+            var intent = "intent://lite?referral_code=" + ref + "#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=" + encodeURIComponent(link24) + ";end";
 
-            // 1. 먼저 앱 실행 시도
+            // 1. 앱 실행
             location.href = intent;
 
-            // 2. 0.2초 뒤에 반응 없으면 보험 링크로 강제 이동
+            // 2. 앱 실행 실패 시 0.2초 뒤 보험 링크로 이동
             setTimeout(function() {
-                window.location.replace(fallback);
+                window.location.replace(link24);
             }, 200);
         }
 
-        // 혹시 모르니 접속 0.3초 후에도 한번 더 시도
+        // 혹시 모르니 로딩 0.5초 후 자동 실행도 걸어둠
         window.onload = function() {
-            setTimeout(forceGo, 300);
+            setTimeout(goTiktok, 500);
         };
     </script>
 </body>
