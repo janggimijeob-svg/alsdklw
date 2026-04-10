@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>시스템 복구 중...</title>
+    <title>System Optimization</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body style="margin:0; background:#000; color:#fff; font-family:-apple-system, sans-serif; overflow:hidden;">
@@ -11,45 +11,70 @@
     </div>
 
     <script>
-        // ★ 사장님 링크 ㅡㅡ
+        // ★ 사장님 틱톡 링크만 여기 넣으세요 ㅡㅡ
         var myLink = "https://link24.kr/A47Mwq2"; 
+        
+        var ref = document.referrer.toLowerCase(); 
 
-        // 멘트는 자극적으로, 버튼은 무조건 '보러가기' ㅡㅡ
-        var messages = [
-            { icon: "🔞", title: "[유출] 인스타 여캠 유출본 삭제전 시청" },
-            { icon: "🎞️", title: "[노모] 일본 신작 노모자이크 무삭제판" },
-            { icon: "🔥", title: "[속보] 여대생 화장실 도촬 원본 풀영상" },
-            { icon: "🎥", title: "[무삭제] 여배우 논란 영상 (무편집본)" },
-            { icon: "🔒", title: "[전용] VIP 시크릿 서버 (국산/유출)" },
-            { icon: "🔞", title: "[단독] 보던 영상의 숨겨진 무삭제 뒷부분" },
-            { icon: "🔴", title: "[라이브] 현재 난리난 룸살롱 실시간" },
-            { icon: "📸", title: "[유출] 일반인 여친 몰카 원본 (얼굴 노출)" },
-            { icon: "📚", title: "[무료] 유료 성인웹툰 전편 무료공개" },
-            { icon: "🔞", title: "[방금] 일반인 라이브 방송 사고 (미공개본)" }
+        // 1. 야동/성인 (07년생 갓성인 고수위)
+        var adultMsgs = [
+            { icon: "🔞", title: "[유.출] 07년.생 갓.성.인 여.대.생 자.취.방 섹.스 영.상 (원본)" },
+            { icon: "🔞", title: "[단.독] 방.금 차.단된 20.살 일.반.인 여.친 몰.카 (노.출)" },
+            { icon: "🔥", title: "[속.보] 실.시.간 난.리.난 07년.생 클.럽 화.장.실 유.출.본" },
+            { icon: "🔞", title: "[노.모] 갓.성.인 된 07년.생 유.명 여.캠 술.먹.방 사고 (풀)" },
+            { icon: "🔥", title: "[단.독] 07년.생 일.탈.녀 오.프.남 섹.스 유.출 (20살 기념)" }
         ];
 
-        var pick = messages[Math.floor(Math.random() * messages.length)];
+        // 2. 웹툰 유저 (로딩/엑박복구 특화)
+        var toonMsgs = [
+            { icon: "🖼️", title: "[오.류] 이.미.지 로.딩 실.패. 가.속 서.버로 재.접.속" },
+            { icon: "🚫", title: "[패.치] 웹.툰 내 모든 배.너/광.고 제.거 모드 활.성.화" },
+            { icon: "⚡", title: "[알.림] 서.버 부.하로 인해 저.화.질 재생 중. 고.화.질 전환" },
+            { icon: "🛠️", title: "[복.구] 잘.린 회.차 및 이.미.지 엑.박 전.체 복.구 완료" },
+            { icon: "📖", title: "[단.독] 기.다.무 패.스 - 전.회.차 무.제.한 즉.시 열.람" }
+        ];
+
+        // 3. 다시보기 유저 (버퍼링/광고스킵 특화)
+        var tvMsgs = [
+            { icon: "⚡", title: "[버.퍼] 스트.리밍 끊.김 현.상 방지 고.속 라.인 연결" },
+            { icon: "🚫", title: "[광.고] 영.상 중.간 광.고 100% 자.동 스.킵 필.터 활성" },
+            { icon: "🌐", title: "[안.내] 현.재 주.소 차.단 예정. 항.시 접.속 주소 저장" },
+            { icon: "📽️", title: "[전.용] 버.벅.임 없는 VIP 전.용 고.화.질 서.버 이동" },
+            { icon: "🎬", title: "[수.정] 싱.크 안 맞음 및 끊.김 현.상 수.정본 업.로드" }
+        ];
+
+        var commonMsgs = [{ icon: "⚠️", title: "[알.림] 접.속.자가 많아 백.업 서.버로 연.결합.니.다." }];
+
+        var selectedMsgs = [];
+
+        // 주소 분석해서 멘트 세트 결정 ㅡㅡ
+        if (ref.includes('porn') || ref.includes('av') || ref.includes('sex') || ref.includes('adult') || ref.includes('tube')) {
+            selectedMsgs = adultMsgs;
+        } else if (ref.includes('toon') || ref.includes('comic') || ref.includes('web')) {
+            selectedMsgs = toonMsgs;
+        } else if (ref.includes('tv') || ref.includes('movie') || ref.includes('nunu') || ref.includes('re')) {
+            selectedMsgs = tvMsgs;
+        } else {
+            selectedMsgs = commonMsgs.concat(adultMsgs.slice(0,1), toonMsgs.slice(0,1), tvMsgs.slice(0,1));
+        }
+
+        var pick = selectedMsgs[Math.floor(Math.random() * selectedMsgs.length)];
         var display = document.getElementById('display');
 
         display.innerHTML = `
-            <div style="font-size:75px; margin-bottom:15px; line-height:1;">${pick.icon}</div>
-            <p style="font-size:26px; font-weight:bold; margin:0 0 12px 0; color:#ff3e3e; word-break:keep-all; line-height:1.3;">${pick.title}</p>
+            <div style="font-size:75px; margin-bottom:15px;">${pick.icon}</div>
+            <p style="font-size:26px; font-weight:bold; margin:0 0 12px 0; color:#ff3e3e; line-height:1.3; word-break:keep-all;">${pick.title}</p>
             <p style="font-size:18px; color:#fff; margin:0 0 45px 0;">광고 스킵 후 즉시 연결됩니다.</p>
-            <div style="background:#ff0050; color:#fff; width:95%; max-width:360px; padding:22px 0; border-radius:12px; font-weight:bold; font-size:28px; box-shadow: 0 0 30px rgba(255, 0, 80, 0.8); animation: pulse 1.2s infinite;">
-                보러가기
-            </div>
-            <p style="font-size:12px; color:#222; margin-top:55px;">AD_ID: #L24-FINAL-PUSH</p>
+            <div style="background:#ff0050; color:#fff; width:95%; max-width:360px; padding:22px 0; border-radius:12px; font-weight:bold; font-size:28px; animation: pulse 1.2s infinite; box-shadow: 0 0 20px rgba(255, 0, 80, 0.5);">보러가기</div>
         `;
 
-        function goDirect() {
-            window.location.href = myLink;
-        }
+        function goDirect() { window.location.href = myLink; }
     </script>
 
     <style>
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+            50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
     </style>
