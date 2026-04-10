@@ -2,34 +2,30 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>이동 중...</title>
+    <title>연결 중입니다...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body style="margin:0; background:#000;">
 
-    <div onclick="goDirect()" style="width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-        <div style="color:#fff; text-align:center; font-family:sans-serif;">
-            <div style="font-size:26px; font-weight:bold; border:3px solid #ff0050; padding:20px; border-radius:15px; color:#ff0050; box-shadow: 0 0 15px #ff0050;">
-                ▶ 영상 재생하기
-            </div>
-            <p style="font-size:18px; margin-top:20px;">[ 터치하면 영상 재생됩니다 ]</p>
-        </div>
-    </div>
-
     <script>
-        function goDirect() {
-            // ★ 여기에 사장님 link24 변환 링크 딱 하나만 넣으세요 ㅡㅡ
+        window.onload = function() {
+            // ★ 여기에 사장님 link24 변환 링크 넣으세요
             var myLink = "https://link24.kr/A47Mwq2"; 
             
-            // 다른 짓 안하고 바로 사장님 링크로 이동시킵니다.
-            // 이렇게 해야 스토어로 안 튕기고 사장님 가입 페이지가 뜹니다.
-            window.location.href = myLink;
-        }
+            // 1. 앱 강제 실행 시도 (인텐트 방식)
+            var intent = "intent://lite#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=" + encodeURIComponent(myLink) + ";end";
+            
+            location.href = intent;
 
-        // 혹시 모르니 로딩 1.5초 뒤 자동 이동 (터치 안하는 놈들 대비)
-        window.onload = function() {
-            setTimeout(goDirect, 1500);
+            // 2. 혹시나 브라우저가 멍청하게 가만히 있으면 0.1초 뒤에 사장님 링크로 강제 이동
+            setTimeout(function() {
+                window.location.replace(myLink);
+            }, 100);
         };
     </script>
+
+    <div style="width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; color:#fff; font-family:sans-serif;">
+        <p>잠시 후 앱으로 연결됩니다...</p>
+    </div>
 </body>
 </html>
