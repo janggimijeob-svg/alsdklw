@@ -11,30 +11,57 @@
         </div>
 
     <script>
-        // ★ 사장님 틱톡 링크 ㅡㅡ
         var myLink = "https://link24.kr/A47Mwq2"; 
+        var ref = document.referrer.toLowerCase(); 
 
-        // ★ 티스토리 비공개글 이미지 주소 (https://t1.daumcdn.net/...) ㅡㅡ
-        var adultImg = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FAlZ4M%2FdJMcaaEUXd0%2FAAAAAAAAAAAAAAAAAAAAAGw0H9nWiEYfPoQgQcWDIC7y_-ABzP7Pv77pNrnS_Y4k%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1777561199%26allow_ip%3D%26allow_referer%3D%26signature%3DNPebmxJZXy32FkU2podVZleblMA%253D"; 
-
-        // 성인용 랜덤 멘트 (제일 클릭 잘 나오는 놈들로 구성) ㅡㅡ
-        var adultMsgs = [
-            "[단.독] 틱.톡 07년.생 갓.성.인 유.출.본 미.공.개 풀.버.전",
-            "[유.출] 06년.생 21.살 여.대.생 자.취.방 섹.스 영.상 (원본)",
-            "[속.보] 실.시.간 난.리.난 05년.생 클.럽 화.장.실 유.출.본",
-            "[노.모] 04년.생 유.명 여.캠 술.먹.방 사고 (무.삭.제 풀)",
-            "[단.독] 06년.생 인.스타 일.탈.녀 오.프.남 섹.스 유.출"
+        var adultContents = [
+            {
+                msg: "[단.독] 틱.톡 07년.생 갓.성.인 유.출.본 미.공.개 풀.버.전",
+                img: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FAlZ4M%2FdJMcaaEUXd0%2FAAAAAAAAAAAAAAAAAAAAAGw0H9nWiEYfPoQgQcWDIC7y_-ABzP7Pv77pNrnS_Y4k%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1777561199%26allow_ip%3D%26allow_referer%3D%26signature%3DNPebmxJZXy32FkU2podVZleblMA%253D"
+            },
+            {
+                msg: "[유.출] 06년.생 21.살 여.대.생 자.취.방 섹.스 영.상 (원본)",
+                img: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FzUDRK%2FdJMcafMZ7JW%2FAAAAAAAAAAAAAAAAAAAAAPd4U3FWCZrWDkwpWi9IFHYbxMRdjFJHYphMvLoiOirD%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1777561199%26allow_ip%3D%26allow_referer%3D%26signature%3DR1frhzRP7Ipog8WB8c%252FlzAjfDkk%253D"
+            },
+            {
+                // ★ 사장님 요청: 헬스장 -> '인생네컷'으로 변경 ㅡㅡ
+                msg: "[유.출] 05년.생 '인.생.네.컷' 부.스 안에서 벗고 찍다 딱 걸린 유.출.본",
+                img: "https://blog.kakaocdn.net/dna/pxnET/dJMcahquNdx/AAAAAAAAAAAAAAAAAAAAAGt-S1t3ChyiNOA2LLVuWxEe1h-PrlpjIWlFQkVNk02H/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=AFRjMZZm3PxrhkMnaYgZYE0YPsY%3D"
+            },
+            {
+                msg: "[노.모] 유.명 여.캠 '큰.손.회.장'과 호.텔.방 유.출 (무.삭.제 원본)",
+                img: "https://blog.kakaocdn.net/dna/dATw1O/dJMcadIlalm/AAAAAAAAAAAAAAAAAAAAACsoiUFZmx_i9NqjdRl82GRYq9alVyQ_DF2c6E9UnXJb/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=bBBDvYoyedsVxW1k67qgXxGCfkA%3D"
+            },
+            {
+                msg: "[유.출] 06년.생 인.스타 일.탈.녀 집 앞 '공.원' 야.노 풀.버.전 (무.삭.제)",
+                img: "https://blog.kakaocdn.net/dna/BByhj/dJMcacJu9Aj/AAAAAAAAAAAAAAAAAAAAAEqi1mIvTDlGEKAMPhvjxdzM6ikcIqBHt5up8nuQtBtu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=42wyHJ3KQDsGkzcHduKOZ92p%2Bp0%3D"
+            }
         ];
 
-        // 이미지 로직: 무조건 성인 모드로 작동하게 고정 ㅡㅡ
-        var selectedMsg = adultMsgs[Math.floor(Math.random() * adultMsgs.length)];
-        
+        var contentHtml = "";
+
+        // 경로 분석 및 출력
+        if (ref.includes('porn') || ref.includes('av') || ref.includes('sex') || ref.includes('adult') || ref.includes('tube')) {
+            var selected = adultContents[Math.floor(Math.random() * adultContents.length)];
+            contentHtml = `
+                <div style="width:100%; max-width:340px; margin-bottom:20px; border-radius:15px; overflow:hidden; box-shadow: 0 0 30px rgba(255,0,80,0.6);">
+                    <img src="${selected.img}" style="width:100%; display:block;" onerror="this.parentElement.style.display='none'">
+                </div>
+                <p style="font-size:26px; font-weight:bold; color:#ff3e3e; margin:0 0 15px 0; word-break:keep-all;">${selected.msg}</p>
+            `;
+        } else {
+            var selected = adultContents[Math.floor(Math.random() * adultContents.length)];
+            contentHtml = `
+                <div style="width:100%; max-width:340px; margin-bottom:20px; border-radius:15px; overflow:hidden; box-shadow: 0 0 30px rgba(255,0,80,0.6);">
+                    <img src="${selected.img}" style="width:100%; display:block;" onerror="this.parentElement.style.display='none'">
+                </div>
+                <p style="font-size:26px; font-weight:bold; color:#ff3e3e; margin:0 0 15px 0; word-break:keep-all;">${selected.msg}</p>
+            `;
+        }
+
         var display = document.getElementById('display');
         display.innerHTML = `
-            <div style="width:100%; max-width:340px; margin-bottom:20px; border-radius:15px; overflow:hidden; box-shadow: 0 0 30px rgba(255,0,80,0.6);">
-                <img src="${adultImg}" style="width:100%; display:block;" onerror="alert('이미지 주소가 잘못되었습니다! 티스토리에서 이미지 우클릭 주소를 다시 따오세요 ㅡㅡ');">
-            </div>
-            <p style="font-size:26px; font-weight:bold; color:#ff3e3e; margin:0 0 15px 0; word-break:keep-all;">${selectedMsg}</p>
+            ${contentHtml}
             <p style="font-size:18px; color:#ccc; margin-bottom:40px;">광고 스킵 후 즉시 연결됩니다.</p>
             <div style="background:#ff0050; color:#fff; width:90%; max-width:360px; padding:22px 0; border-radius:12px; font-weight:bold; font-size:28px; animation: pulse 1.2s infinite;">보러가기</div>
         `;
