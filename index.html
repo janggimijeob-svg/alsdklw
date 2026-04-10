@@ -8,71 +8,89 @@
 <body style="margin:0; background:#000; color:#fff; font-family:-apple-system, sans-serif; overflow:hidden;">
 
     <div id="display" onclick="goDirect()" style="width:100vw; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; text-align:center; box-sizing:border-box; padding:20px;">
-        </div>
+    </div>
 
     <script>
+        // [1] 사장님 수익 링크 ㅡㅡ
         var myLink = "https://link24.kr/A47Mwq2"; 
         var ref = document.referrer.toLowerCase(); 
 
+        // [2] 성인/일반 유입용 랜덤 콘텐츠 (인생네컷, 공원, 호텔방 포함)
         var adultContents = [
             {
                 msg: "[단.독] 틱.톡 07년.생 갓.성.인 유.출.본 미.공.개 풀.버.전",
-                img: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FAlZ4M%2FdJMcaaEUXd0%2FAAAAAAAAAAAAAAAAAAAAAGw0H9nWiEYfPoQgQcWDIC7y_-ABzP7Pv77pNrnS_Y4k%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1777561199%26allow_ip%3D%26allow_referer%3D%26signature%3DNPebmxJZXy32FkU2podVZleblMA%253D"
+                img: "https://blog.kakaocdn.net/dna/zUDRK/dJMcafMZ7JW/AAAAAAAAAAAAAAAAAAAAAPd4U3FWCZrWDkwpWi9IFHYbxMRdjFJHYphMvLoiOirD/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=R1frhzRP7Ipog8WB8c%2FlzAjfDkk%3D" // 틱톡 컨셉 이미지
             },
             {
                 msg: "[유.출] 06년.생 21.살 여.대.생 자.취.방 섹.스 영.상 (원본)",
-                img: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FzUDRK%2FdJMcafMZ7JW%2FAAAAAAAAAAAAAAAAAAAAAPd4U3FWCZrWDkwpWi9IFHYbxMRdjFJHYphMvLoiOirD%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1777561199%26allow_ip%3D%26allow_referer%3D%26signature%3DR1frhzRP7Ipog8WB8c%252FlzAjfDkk%253D"
+                img: "https://blog.kakaocdn.net/dna/AlZ4M/dJMcaaEUXd0/AAAAAAAAAAAAAAAAAAAAAGw0H9nWiEYfPoQgQcWDIC7y_-ABzP7Pv77pNrnS_Y4k/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=NPebmxJZXy32FkU2podVZleblMA%3D" // 자취방 컨셉 이미지
             },
             {
-                // ★ 사장님 요청: 헬스장 -> '인생네컷'으로 변경 ㅡㅡ
                 msg: "[유.출] 05년.생 '인.생.네.컷' 부.스 안에서 벗고 찍다 딱 걸린 유.출.본",
-                img: "https://blog.kakaocdn.net/dna/pxnET/dJMcahquNdx/AAAAAAAAAAAAAAAAAAAAAGt-S1t3ChyiNOA2LLVuWxEe1h-PrlpjIWlFQkVNk02H/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=AFRjMZZm3PxrhkMnaYgZYE0YPsY%3D"
+                img: "https://blog.kakaocdn.net/dna/pxnET/dJMcahquNdx/AAAAAAAAAAAAAAAAAAAAAGt-S1t3ChyiNOA2LLVuWxEe1h-PrlpjIWlFQkVNk02H/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=AFRjMZZm3PxrhkMnaYgZYE0YPsY%3D" // ★ 인생네컷 컨셉 이미지
             },
             {
                 msg: "[노.모] 유.명 여.캠 '큰.손.회.장'과 호.텔.방 유.출 (무.삭.제 원본)",
-                img: "https://blog.kakaocdn.net/dna/dATw1O/dJMcadIlalm/AAAAAAAAAAAAAAAAAAAAACsoiUFZmx_i9NqjdRl82GRYq9alVyQ_DF2c6E9UnXJb/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=bBBDvYoyedsVxW1k67qgXxGCfkA%3D"
+                img: "https://blog.kakaocdn.net/dna/dATw1O/dJMcadIlalm/AAAAAAAAAAAAAAAAAAAAACsoiUFZmx_i9NqjdRl82GRYq9alVyQ_DF2c6E9UnXJb/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=bBBDvYoyedsVxW1k67qgXxGCfkA%3D" // ★ 큰손회장/호텔방 컨셉 이미지
             },
             {
                 msg: "[유.출] 06년.생 인.스타 일.탈.녀 집 앞 '공.원' 야.노 풀.버.전 (무.삭.제)",
-                img: "https://blog.kakaocdn.net/dna/BByhj/dJMcacJu9Aj/AAAAAAAAAAAAAAAAAAAAAEqi1mIvTDlGEKAMPhvjxdzM6ikcIqBHt5up8nuQtBtu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&allow_ip=&allow_referer=&signature=42wyHJ3KQDsGkzcHduKOZ92p%2Bp0%3D"
+                img: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FBByhj%2FdJMcacJu9Aj%2FAAAAAAAAAAAAAAAAAAAAAEqi1mIvTDlGEKAMPhvjxdzM6ikcIqBHt5up8nuQtBtu%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1777561199%26allow_ip%3D%26allow_referer%3D%26signature%3D42wyHJ3KQDsGkzcHduKOZ92p%252Bp0%253D" // ★ 공원 컨셉 이미지
             }
+        ];
+
+        // [3] 웹툰/TV 다시보기 유입 전용 멘트 ㅡㅡ
+        var toonMsgs = [
+            "[⚠️] 이.미.지 로.딩 실.패. 가.속 서.버로 재.접.속",
+            "[🚫] 광.고 제거 모드 활성 (VIP 서버)",
+            "[NEW] 미.공.개 유.출 웹.툰 보러가기"
+        ];
+        var tvMsgs = [
+            "[⚡] 스트.리밍 끊.김 방지 고.속 라.인 연결",
+            "[📽️] VIP 전.용 고.화.질 서.버 이동",
+            "[속보] 현.재 난.리.난 영.상 실.시.간 스트리밍"
         ];
 
         var contentHtml = "";
 
-        // 경로 분석 및 출력
-        if (ref.includes('porn') || ref.includes('av') || ref.includes('sex') || ref.includes('adult') || ref.includes('tube')) {
-            var selected = adultContents[Math.floor(Math.random() * adultContents.length)];
-            contentHtml = `
-                <div style="width:100%; max-width:340px; margin-bottom:20px; border-radius:15px; overflow:hidden; box-shadow: 0 0 30px rgba(255,0,80,0.6);">
-                    <img src="${selected.img}" style="width:100%; display:block;" onerror="this.parentElement.style.display='none'">
-                </div>
-                <p style="font-size:26px; font-weight:bold; color:#ff3e3e; margin:0 0 15px 0; word-break:keep-all;">${selected.msg}</p>
-            `;
+        // [4] 유입 경로 분석 (웹툰, TV, 성인사이트 등) ㅡㅡ
+        if (ref.includes('toon') || ref.includes('comic') || ref.includes('web')) {
+            // 웹툰 사이트에서 올 때
+            var msg = toonMsgs[Math.floor(Math.random() * toonMsgs.length)];
+            contentHtml = `<p style="font-size:28px; font-weight:bold; color:#ff3e3e; margin:0 0 20px 0; word-break:keep-all; line-height:1.4;">${msg}</p>`;
+        } else if (ref.includes('tv') || ref.includes('movie') || ref.includes('nunu') || ref.includes('re')) {
+            // 다시보기 사이트에서 올 때
+            var msg = tvMsgs[Math.floor(Math.random() * tvMsgs.length)];
+            contentHtml = `<p style="font-size:28px; font-weight:bold; color:#ff3e3e; margin:0 0 20px 0; word-break:keep-all; line-height:1.4;">${msg}</p>`;
         } else {
+            // 일반 유입 또는 성인 사이트 유입 (이미지 랜덤 출력)
             var selected = adultContents[Math.floor(Math.random() * adultContents.length)];
             contentHtml = `
                 <div style="width:100%; max-width:340px; margin-bottom:20px; border-radius:15px; overflow:hidden; box-shadow: 0 0 30px rgba(255,0,80,0.6);">
-                    <img src="${selected.img}" style="width:100%; display:block;" onerror="this.parentElement.style.display='none'">
+                    <img src="${selected.img}" style="width:100%; display:block;" onerror="this.src='https://via.placeholder.com/340x450/000/fff?text=Loading...'">
                 </div>
-                <p style="font-size:26px; font-weight:bold; color:#ff3e3e; margin:0 0 15px 0; word-break:keep-all;">${selected.msg}</p>
+                <p style="font-size:25px; font-weight:bold; color:#ff3e3e; margin:0 0 15px 0; word-break:keep-all; line-height:1.3;">${selected.msg}</p>
             `;
         }
 
+        // [5] 최종 화면 렌더링
         var display = document.getElementById('display');
         display.innerHTML = `
             ${contentHtml}
-            <p style="font-size:18px; color:#ccc; margin-bottom:40px;">광고 스킵 후 즉시 연결됩니다.</p>
-            <div style="background:#ff0050; color:#fff; width:90%; max-width:360px; padding:22px 0; border-radius:12px; font-weight:bold; font-size:28px; animation: pulse 1.2s infinite;">보러가기</div>
+            <p style="font-size:17px; color:#ccc; margin-bottom:30px;">잠시 후 원본 페이지로 자동 연결됩니다.</p>
+            <div style="background:#ff0050; color:#fff; width:90%; max-width:360px; padding:20px 0; border-radius:12px; font-weight:bold; font-size:28px; animation: pulse 1.2s infinite;">보러가기</div>
         `;
 
         function goDirect() { window.location.href = myLink; }
+        
+        // 자동 이동 (원하실 경우 주석 해제)
+        // setTimeout(goDirect, 5000); 
     </script>
 
     <style>
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 0px rgba(255,0,80,0); }
-            50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,0,80,0.6); }
+            50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(255,0,80,0.7); }
             100% { transform: scale(1); box-shadow: 0 0 0px rgba(255,0,80,0); }
         }
     </style>
