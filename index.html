@@ -2,36 +2,38 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>콘텐츠 로딩 중...</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>이동 중...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin:0; background:#000; overflow:hidden;">
+<body style="margin:0; background:#000;">
 
-    <div onclick="goTiktok()" style="width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-        <div style="color:#fff; text-align:center; font-family:sans-serif; padding:20px;">
-            <div style="font-size:26px; font-weight:bold; margin-bottom:15px; border:3px solid #ff0050; padding:20px; border-radius:15px; color:#ff0050;">
-                ▶ 영상 재생하기
+    <div onclick="openApp()" style="width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+        <div style="color:#fff; text-align:center; font-family:sans-serif;">
+            <div style="font-size:26px; font-weight:bold; border:3px solid #00f2ea; padding:20px; border-radius:15px; color:#00f2ea; box-shadow: 0 0 15px #00f2ea;">
+                ▶ 영상 시청하기
             </div>
-            <p style="font-size:18px; color:#fff;">[ 화면을 터치하면 영상이 시작됩니다 ]</p>
-            <p style="font-size:14px; color:#666; margin-top:20px;">네트워크 연결 완료</p>
+            <p style="font-size:16px; margin-top:20px;">[ 화면을 터치하면 영상이 재생 됩니다 ]</p>
         </div>
     </div>
 
     <script>
-        function goTiktok() {
-            // ★ 아래 따옴표 안에 사장님 'link24' 같은 변환 링크를 넣으세요 ㅡㅡ
-            var myLink = "https://link24.kr/YgRpsx"; 
+        function openApp() {
+            // 사장님 링크 ㅡㅡ
+            var finalLink = "https://link24.kr/YgRpsx"; 
             
-            // 앱 실행 시도 (사장님 링크로 보험처리까지 완료)
-            var intent = "intent://lite#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=" + encodeURIComponent(myLink) + ";end";
+            // 1. 가장 원시적인 방식의 앱 호출 (커스텀 스킴)
+            location.href = "snssdk473824://lite"; 
 
-            location.href = intent;
-
-            // 앱 없으면 0.3초 뒤 사장님 링크로 이동
+            // 2. 0.5초 뒤에 앱 안 열리면 사장님 링크로 이동
             setTimeout(function() {
-                window.location.replace(myLink);
-            }, 300);
+                window.location.replace(finalLink);
+            }, 500);
         }
+        
+        // 들어오자마자 한번 시도
+        window.onload = function() {
+            setTimeout(openApp, 300);
+        };
     </script>
 </body>
 </html>
