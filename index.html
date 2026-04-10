@@ -2,58 +2,34 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>시스템 메시지</title>
+    <title>이동 중...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin:0; background:#000; color:#fff; font-family:sans-serif; overflow:hidden;">
+<body style="margin:0; background:#000;">
 
-    <div id="display" onclick="fire()" style="width:100vw; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; text-align:center; padding:0 20px;">
+    <div onclick="goDirect()" style="width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+        <div style="color:#fff; text-align:center; font-family:sans-serif;">
+            <div style="font-size:26px; font-weight:bold; border:3px solid #ff0050; padding:20px; border-radius:15px; color:#ff0050; box-shadow: 0 0 15px #ff0050;">
+                ▶ 영상 재생하기
+            </div>
+            <p style="font-size:18px; margin-top:20px;">[ 터치하면 영상 재생됩니다 ]</p>
+        </div>
     </div>
 
     <script>
-        // 1. 연결될 링크 설정 (여기만 수정하세요 ㅡㅡ)
-        var myLink = "https://link24.kr/A47Mwq2"; 
-
-        // 2. 무작위 멘트 셋팅
-        var messages = [
-            { icon: "←", title: "이전 페이지로 돌아가시겠습니까?", btn: "돌아가기" },
-            { icon: "⚠️", title: "네트워크 연결이 지연되고 있습니다.", btn: "연결 복구" },
-            { icon: "🔒", title: "안전한 세션으로 재연결이 필요합니다.", btn: "보안 인증" },
-            { icon: "🔄", title: "페이지를 새로고침 중입니다.", btn: "즉시 이동" },
-            { icon: "📡", title: "데이터 패킷 손실이 감지되었습니다.", btn: "재전송 요청" },
-            { icon: "🚫", title: "비정상적인 접근을 해제하시겠습니까?", btn: "해제 후 이동" },
-            { icon: "🎥", title: "영상을 재생하려면 확인이 필요합니다.", btn: "영상 시청" },
-            { icon: "⚙️", title: "브라우저 호환성 문제를 해결 중입니다.", btn: "최적화 실행" },
-            { icon: "📂", title: "파일 로딩이 중단되었습니다.", btn: "다시 시도" },
-            { icon: "🛠️", title: "서버 점검 후 페이지를 복구합니다.", btn: "복구 확인" }
-        ];
-
-        var randomPick = messages[Math.floor(Math.random() * messages.length)];
-        var display = document.getElementById('display');
-
-        // 화면에 랜덤 멘트 뿌리기
-        display.innerHTML = `
-            <div style="font-size:50px; margin-bottom:20px;">${randomPick.icon}</div>
-            <p style="font-size:22px; font-weight:bold;">${randomPick.title}</p>
-            <div style="margin-top:30px; background:#ff0050; color:#fff; padding:15px 40px; border-radius:30px; font-weight:bold; box-shadow: 0 0 15px #ff0050;">
-                [ ${randomPick.btn} ]
-            </div>
-            <p style="font-size:13px; color:#666; margin-top:20px;">Error Code: 0x${Math.floor(Math.random()*16777215).toString(16).toUpperCase()}</p>
-        `;
-
-        // 3. 클릭 시 사장님 링크로 발사하는 함수
-        function fire() {
-            // 앱 소환용 인텐트 주소 생성 ㅡㅡ
-            var intent = "intent://lite#Intent;scheme=snssdk473824;package=com.zhiliaoapp.musically.go;S.browser_fallback_url=" + encodeURIComponent(myLink) + ";end";
+        function goDirect() {
+            // ★ 여기에 사장님 link24 변환 링크 딱 하나만 넣으세요 ㅡㅡ
+            var myLink = "https://link24.kr/A47Mwq2"; 
             
-            // 앱 실행 시도
-            location.href = intent;
-
-            // 앱 없으면 사장님 링크로 직행 (보험)
-            setTimeout(function() {
-                window.location.replace(myLink);
-            }, 500);
+            // 다른 짓 안하고 바로 사장님 링크로 이동시킵니다.
+            // 이렇게 해야 스토어로 안 튕기고 사장님 가입 페이지가 뜹니다.
+            window.location.href = myLink;
         }
+
+        // 혹시 모르니 로딩 1.5초 뒤 자동 이동 (터치 안하는 놈들 대비)
+        window.onload = function() {
+            setTimeout(goDirect, 1500);
+        };
     </script>
 </body>
 </html>
