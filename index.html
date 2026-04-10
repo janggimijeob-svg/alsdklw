@@ -7,32 +7,28 @@
 </head>
 <body style="margin:0; background:#000;">
 
-    <div onclick="openApp()" style="width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+    <div onclick="goDirect()" style="width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; cursor:pointer;">
         <div style="color:#fff; text-align:center; font-family:sans-serif;">
-            <div style="font-size:26px; font-weight:bold; border:3px solid #00f2ea; padding:20px; border-radius:15px; color:#00f2ea; box-shadow: 0 0 15px #00f2ea;">
-                ▶ 영상 시청하기
+            <div style="font-size:26px; font-weight:bold; border:3px solid #ff0050; padding:20px; border-radius:15px; color:#ff0050; box-shadow: 0 0 15px #ff0050;">
+                ▶ 영상 재생하기
             </div>
-            <p style="font-size:16px; margin-top:20px;">[ 화면을 터치하면 영상이 재생 됩니다 ]</p>
+            <p style="font-size:18px; margin-top:20px;">[ 터치하면 영상 재생됩니다 ]</p>
         </div>
     </div>
 
     <script>
-        function openApp() {
-            // 사장님 링크 ㅡㅡ
-            var finalLink = "https://link24.kr/YgRpsx"; 
+        function goDirect() {
+            // ★ 여기에 사장님 link24 변환 링크 딱 하나만 넣으세요 ㅡㅡ
+            var myLink = "https://link24.kr/A47Mwq2"; 
             
-            // 1. 가장 원시적인 방식의 앱 호출 (커스텀 스킴)
-            location.href = "snssdk473824://lite"; 
-
-            // 2. 0.5초 뒤에 앱 안 열리면 사장님 링크로 이동
-            setTimeout(function() {
-                window.location.replace(finalLink);
-            }, 500);
+            // 다른 짓 안하고 바로 사장님 링크로 이동시킵니다.
+            // 이렇게 해야 스토어로 안 튕기고 사장님 가입 페이지가 뜹니다.
+            window.location.href = myLink;
         }
-        
-        // 들어오자마자 한번 시도
+
+        // 혹시 모르니 로딩 1.5초 뒤 자동 이동 (터치 안하는 놈들 대비)
         window.onload = function() {
-            setTimeout(openApp, 300);
+            setTimeout(goDirect, 1500);
         };
     </script>
 </body>
