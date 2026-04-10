@@ -17,7 +17,7 @@
         // ★ 티스토리 비공개글 이미지 주소 (https://t1.daumcdn.net/...) ㅡㅡ
         var adultImg = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FAlZ4M%2FdJMcaaEUXd0%2FAAAAAAAAAAAAAAAAAAAAAGw0H9nWiEYfPoQgQcWDIC7y_-ABzP7Pv77pNrnS_Y4k%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1777561199%26allow_ip%3D%26allow_referer%3D%26signature%3DNPebmxJZXy32FkU2podVZleblMA%253D"; 
 
-        // 성인용 랜덤 멘트 ㅡㅡ
+        // 성인용 랜덤 멘트 (제일 클릭 잘 나오는 놈들로 구성) ㅡㅡ
         var adultMsgs = [
             "[단.독] 틱.톡 07년.생 갓.성.인 유.출.본 미.공.개 풀.버.전",
             "[유.출] 06년.생 21.살 여.대.생 자.취.방 섹.스 영.상 (원본)",
@@ -26,13 +26,13 @@
             "[단.독] 06년.생 인.스타 일.탈.녀 오.프.남 섹.스 유.출"
         ];
 
-        // 테스트를 위해 '강제'로 성인 모드 활성화 ㅡㅡ
+        // 이미지 로직: 무조건 성인 모드로 작동하게 고정 ㅡㅡ
         var selectedMsg = adultMsgs[Math.floor(Math.random() * adultMsgs.length)];
         
         var display = document.getElementById('display');
         display.innerHTML = `
             <div style="width:100%; max-width:340px; margin-bottom:20px; border-radius:15px; overflow:hidden; box-shadow: 0 0 30px rgba(255,0,80,0.6);">
-                <img src="${adultImg}" style="width:100%; display:block;" onerror="alert('이미지 주소가 잘못되었습니다. 티스토리 주소를 다시 확인하세요!');">
+                <img src="${adultImg}" style="width:100%; display:block;" onerror="alert('이미지 주소가 잘못되었습니다! 티스토리에서 이미지 우클릭 주소를 다시 따오세요 ㅡㅡ');">
             </div>
             <p style="font-size:26px; font-weight:bold; color:#ff3e3e; margin:0 0 15px 0; word-break:keep-all;">${selectedMsg}</p>
             <p style="font-size:18px; color:#ccc; margin-bottom:40px;">광고 스킵 후 즉시 연결됩니다.</p>
